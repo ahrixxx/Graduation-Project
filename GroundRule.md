@@ -1,4 +1,4 @@
-# Team Ground Rules (v0.1)
+# Team Ground Rules (v0.9)
 
 ## 📅 정기 회의
 
