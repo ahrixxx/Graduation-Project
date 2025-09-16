@@ -7,7 +7,7 @@
 - `README.md`: 프로젝트 구조 소개
 - `Ideation.md`: 프로젝트 아이디어 브레인스토밍
 - `GroundRule.md`: 팀원 간의 협업 규칙
-- `ProjectBrief.md`: 프로젝트의 내용 설명
+- `Projet-Scenario.md`: 프로젝트의 내용 설명
 - 
 ## Version
 - v0.1 (초안)
