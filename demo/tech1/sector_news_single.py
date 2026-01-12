@@ -69,9 +69,7 @@ class SectorOutput(BaseModel):
     evidence_article_ids: list[str]
 
 # 4.  프롬프트 (한국어, 종목 요약 2~3문장으로 강화)
-SYSTEM_PROMPT = """
-당신은 금융 뉴스 요약가이자 감성(톤) 분류기입니다.
-
+SYSTEM_PROMPT = """ 당신은 금융 뉴스 요약가이자 감성(톤) 분류기입니다.
 반드시 지켜야 할 것:
 - 모든 결과는 한국어로 작성합니다.
 - 유효한 JSON만 반환합니다. (앞뒤에 설명 금지)
@@ -94,7 +92,6 @@ SYSTEM_PROMPT = """
 
 USER_PROMPT_TEMPLATE = """
 섹터: {sector_display}
-
 아래 기사(JSON)를 근거로, 요구된 형식의 JSON만 반환하세요.
 
 요구사항:
@@ -102,12 +99,9 @@ USER_PROMPT_TEMPLATE = """
 2) tickers[].summary: 한국어 2~3문장 (핵심 이슈 + 의미 + 전망 포함)
 3) tickers[].tone: "긍정" | "중립" | "부정"
 4) evidence_article_ids: 사용 기사 ID 3개 이상
-
 기사 목록(JSON):
 {articles_json}
-
-반드시 올바른 JSON만 반환하세요.
-"""
+반드시 올바른 JSON만 반환하세요. """
 
 # 5. GPT 호출
 def analyze_with_gpt(sector_key, sector_display, articles):
@@ -184,7 +178,7 @@ def render_markdown(result):
     return "\n".join(lines)
 
 # 7. 스케줄러 헬퍼 함수들
-def seconds_until(hour: int = 19, minute: int = 5):
+def seconds_until(hour: int = 17, minute: int = 33):
     kst = dt.timezone(dt.timedelta(hours=9))
     now = dt.datetime.now(kst)
     target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
@@ -195,7 +189,7 @@ def seconds_until(hour: int = 19, minute: int = 5):
 def run_daily_at_9():
     print("매일 9:00 KST에 섹터 뉴스 요약을 실행합니다.")
     while True:
-        wait_sec = seconds_until(19, 5)
+        wait_sec = seconds_until(17, 33)
         kst = dt.timezone(dt.timedelta(hours=9))
         next_run = dt.datetime.now(kst) + dt.timedelta(seconds=wait_sec)
         print(f"다음 실행 예정: {next_run.strftime('%Y-%m-%d %H:%M:%S')} KST")
