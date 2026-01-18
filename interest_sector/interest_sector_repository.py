@@ -13,8 +13,10 @@ def save(db: Session, entity):
     return entity
 
 def delete(db: Session, user_id: int, sector_id: int):
-    return db.query(UserInterestSector)\
+    db.query(UserInterestSector)\
         .filter(
             UserInterestSector.user_id == user_id,
             UserInterestSector.sector_id == sector_id
         ).delete()
+    db.commit()
+
